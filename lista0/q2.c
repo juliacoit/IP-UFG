@@ -11,5 +11,7 @@ scanf("%f", &polegadas);
 float celsius = (5*(fahrenheit - 32))/9;
 float chuvaEmMili = polegadas*25.4;
 
-printf("O VALOR EM CELSIUS = ")
+printf("O VALOR EM CELSIUS = %.2lf\n", celsius);
+printf("A QUANTIDADE DE CHUVA E = %.2lf\n", chuvaEmMili);
+return 0;
 }
