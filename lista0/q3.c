@@ -13,7 +13,7 @@ float areaLateral = 2*PI*raio*altura;
 float areaTotal = 2*areaDoCirculo + areaLateral;
 float valorDeCusto = areaTotal*100;
 
-printf("O VALOR DE CUSTO E = %.2lf\n", valorDeCusto);
+printf("O VALOR DO CUSTO E = %.2f\n", valorDeCusto);
 
 return 0;
 }
