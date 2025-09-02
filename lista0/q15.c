@@ -38,7 +38,6 @@
     }
     else {
         int resto1, resto2, resto3, resto4, resto5, resto6, resto7, resto8;
-        int i;
         
         resto1 = inteiro % 2;
         int divisao = inteiro/2;
