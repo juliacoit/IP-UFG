@@ -1,4 +1,8 @@
 {
     "C_Cpp.default.compilerPath": "c:\\Users\\anima\\mingw64\\mingw.bat",
-    "C_Cpp.errorSquiggles": "disabled"
+    "C_Cpp.errorSquiggles": "disabled",
+    "files.associations": {
+        "*.txt": "bibtex",
+        "stdio.h": "c"
+    }
 }
