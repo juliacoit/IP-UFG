@@ -4,6 +4,7 @@
 void levr2(double x[]);
 double modulo (double x[]);
 void printvr2(double * x);
+double angulovr2(double * x);
 
 int main(){
 
@@ -14,6 +15,7 @@ printvr2(a);
 
 double m = modulo(a);
 printf("Modulo: %.2lf\n", m);
+printf("Angulo:  %.2lf\n", angulovr2(a));
 return 0;
 }
 
@@ -28,4 +30,8 @@ double modulo (double * x) {
 
 void printvr2(double x[]) {
     printf("(%.1lf, %.1lf)\n", x[0], x[1]);
+}
+
+double angulovr2(double * x) {
+    return atan(x[1]/x[0])*180/M_PI;
 }
