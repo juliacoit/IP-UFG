@@ -1,0 +1,53 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
+#define NL 100
+#define NC 100
+
+void set_bg(int M[][NC], int nl, int nc, int color);
+void print_img(int M[][NC], int nl, int nc);
+void set_noise(int M[][NC], int nl, int nc);
+
+int main () {
+    int I[NL][NC];
+    set_bg(I, 20, 20, 7);
+    set_noise(I, 20, 20);
+    print_img(I, NL, NC);
+    return 0;
+}
+
+void set_bg(int M[][NC], int nl, int nc, int color) {
+    int l, c;
+    srand(time(0));
+
+    for (l = 0; l < nl; l++) {
+        for (c = 0; c < nc; c++) {
+            M[l][c] = color;
+        }
+    }
+}
+void set_noise(int M[][NC], int nl, int nc) {
+    int l, c;
+
+    for (l = 0; l < nl; l++) {
+        for (c = 0; c < nc; c++) {
+            M[l][c] = rand()%(12);
+        }
+    }
+}
+
+void print_img(int M[][NC], int nl, int nc) {
+    int l, c;
+
+    printf("P2\n"); // PGM code
+    printf("%d %d\n", nc, nl); // number of columns and rows
+    printf("%d\n", 11); // maximum brightness
+
+    for (l = 0; l < nl; l++) {
+        for (c = 0; c < nc; c++) {
+            printf("%d ", M[l][c]);
+        }
+        printf("\n");
+    }
+}
