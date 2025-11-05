@@ -16,36 +16,73 @@ int main(){
     int ordem, soma, matriz[500][500];
     scanf("%d", &ordem);
 
+    printf("%d\n", ordem);
+    int ehPerm = ehPermutacao(matriz, ordem, &soma);
 
+    if (ehPerm) {
+        printf("PERMUTACAO\n");
+    }
+    else{
+        printf("NAO EH PERMUTACAO\n");
+    }
+    printf("%d", soma);
+
+    
 
     return 0;
 }
 
 int ehPermutacao( int matriz[500][500], int n, int *soma ){
     int i, j;
-    int umColuna, vezesUmLinha = 0, *soma = 0;
+    int umColuna, vezesUmLinha = 0;
     bool ehPerm = true;
+    int elNulo = n - 1;
+
+    *soma = 0;
 
     for (i = 0; i < n; i++){
         for (j = 0; j < n; j++){
+            scanf("%d", &matriz[i][j]);
+        }
+    } 
+
+    for (i = 0; i < n; i++){
+        int contNuloLinha = 0;
+        for (j = 0; j < n; j++){
             *soma = *soma + matriz[i][j];
-            if (matriz[i][j] != 1 && matriz[i][j] != 0){
-                ehPerm = false;
+            if (matriz[i][j] == 0) {
+                contNuloLinha++;
             }
-            if (matriz[i][j] = 1) {
-                vezesUmLinha++;
-                umColuna = j;
-            }
-        }
-        if (vezesUmLinha == 1) {
-            if (matriz[i+1][umColuna] != 0){
+            else if (matriz[i][j] != 1){
                 ehPerm = false;
             }
         }
-        else {
+        if (contNuloLinha != elNulo) {
             ehPerm = false;
         }
+    if (ehPerm == true) {
+        int contNuloColuna;
+
+        for (j = 0; j < 0; j++) {
+            contNuloColuna = 0;
+            for (i = 0; i < n; i++){
+               if (matriz[i][j] == 0) { 
+                    contNuloColuna++;
+                }
+            }
+            if (contNuloColuna != elNulo) {
+                ehPerm != false;
+                break;
+            }
+        }
     }
-    return &soma;
-    
+
+    }
+    if (ehPerm){
+        return 1;
+    }
+    else {
+        return 0;
+    }
+    return *soma;
 }
