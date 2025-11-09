@@ -2,7 +2,7 @@
 #include <string.h>
 #include <stdlib.h>
 
-#define N 500
+#define N 12221
 
 void espelhar(int first, int last);
 
@@ -25,6 +25,8 @@ return 0;
 void espelhar(int first, int last){
     int primeiraParte[N];
     int segundaParte[N];
+    int digitosOrig[N];
+
     int tam = abs(last-first) + 1;
 
     int i, j;
@@ -34,6 +36,21 @@ void espelhar(int first, int last){
     for (i = 0; i < tam; i++){
         int digito, invertido = 0;
         int num = primeiraParte[(tam-1)-i];
+        int numTemp = num;
+        int contagemDig = 0;
+
+        if (numTemp == 0) {
+            contagemDig = 1;
+        }
+        else {
+            while (numTemp > 0) {
+                numTemp = numTemp / 10;
+                contagemDig++;
+            }
+        }
+
+        digitosOrig[i] = contagemDig;
+
         while (num > 0) {
             digito = num % 10; // sempre tira o ultimo dig
 
@@ -49,6 +66,10 @@ void espelhar(int first, int last){
         printf("%d", primeiraParte[i]);
     }
     for (i = 0; i < tam; i++) {
-        printf("%d", segundaParte[i]);
+
+        printf("%0*d", digitosOrig[i], segundaParte[i]);
+        if (i == tam-1) {
+            printf("\n");
+        }
     }
 }
