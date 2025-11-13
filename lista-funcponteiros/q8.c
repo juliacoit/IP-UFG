@@ -21,15 +21,24 @@ return 0;
 
 int next_power( int n, int p ){
     int i;
-    int pot;
-    for (i = 0; i <= n; i++){
-        pot = pow(i, p);
+    int pot, dif1, dif2, potMaior, potMenor;
+    for (i = 0; ;i++){
+        pot = round(pow(i, p));
         if (pot > n) {
-            // aqui ele vai chegar no maior, depois devemos diminuir em 1 vez
-            pot = pow(i-1, p);
+            potMaior = pot;
+            potMenor = pow(i-1, p);
+            dif1 = potMaior-n;
+            dif2 = n-potMenor;
+            if (dif1 < dif2) {
+                pot = potMaior;
+                printf("%d -> %d^%d = ", n, i, p);
+            }
+            else{
+                pot = potMenor;
+                printf("%d -> %d^%d = ", n, i-1, p);
+            }
             break;
         }
     }
-    printf("%d -> %d^%d = ", n, i-1, p);
     return pot;
 }
