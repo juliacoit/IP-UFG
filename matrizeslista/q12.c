@@ -3,30 +3,29 @@
 
 int ** createMatrix (int nl, int nc);
 void readMatrix (int ** M, int nl, int nc);
-void freeMatrix(int **M, int nl, int nc);
+void freeMatrix(int **M, int nl);
 void frequencia(int **M, int nl, int nc);
 
 int main (){
-
     int nl, nc;
-    scanf("%d%d", &nl, &nc);
+    scanf("%d %d", &nl, &nc);
+    
     int ** M = createMatrix(nl, nc);
+    
     readMatrix(M, nl, nc);
     frequencia(M, nl, nc);
-    freeMatrix(M, nl, nc);
-
+    freeMatrix(M, nl);
 
     return 0;
 }
 
 int ** createMatrix (int nl, int nc){
     int i;
-    int ** M = (int **)malloc(nl*sizeof(int*));
-
-    for (i=0; i < nl;i++){
-        M[i] = (int *)malloc(nc*sizeof(int));
+    int ** M = (int **)malloc(nl * sizeof(int*));
+    
+    for (i = 0; i < nl; i++){
+        M[i] = (int *)malloc(nc * sizeof(int));
     }
-
     return M;
 }
 
@@ -39,53 +38,49 @@ void readMatrix (int ** M, int nl, int nc){
     }
 }
 
-void freeMatrix(int **M, int nl, int nc){
-    int l, c;
+void freeMatrix(int **M, int nl){
+    int l;
     for (l = 0; l < nl; l++){
-            free(M[l]);
-        }
+        free(M[l]);
+    }
     free(M);
 }
 
 void frequencia (int ** M, int nl, int nc){
-    int ** freq = createMatrix(nl, nc);
-    int i, j, l, c;
-    int freqNum = 0;
-    for (i =0; i < nl; i++){
-        for (j=0; j <nc; j++){
-            for (l =0; l < nl; l++){
-                for (c=0; c <nc; c++){
-                    if (M[i][j] == M[l][c]){
-                        freqNum++;
-                        freq[i][j] = freqNum;
-                    }
+    int menorValor = M[0][0];
+    int maiorValor = M[0][0];
+    
+    int l, c;
 
-                }
+    for (l = 0; l < nl; l++){
+        for (c = 0; c < nc; c++){
+            if (M[l][c] < menorValor) {
+                menorValor = M[l][c];
             }
-            freqNum =0;
-
-        }
-    }
-    int maiorFreq = freq[0][0];
-    int menorFreq = freq[0][0];
-    int maiorNum = M[0][0];
-    int menorNum = M[0][0];
-    for (i =0; i < nl; i++){
-        for (j=0; j <nc; j++){
-            if (maiorFreq < freq[i][j]) {
-                maiorFreq = freq[i][j];
-                maiorNum = M[i][j];
-            }
-            if (menorFreq > freq[i][j]) {
-                menorFreq = freq[i][j];
-                menorNum = M[i][j];
+            if (M[l][c] > maiorValor) {
+                maiorValor = M[l][c];
             }
         }
     }
-    float menorPercent, maiorPercent;
-    menorPercent = (float)(menorFreq*100)/(float)(nl*nc);
-    maiorPercent = (float)(maiorFreq*100)/(float)(nl*nc);
 
-    printf("%d %.2f%%\n%d %.2f%%\n", maiorNum, maiorPercent, menorNum, menorPercent);
-    freeMatrix(freq, nl, nc);
+    int contMenor = 0;
+    int contMaior = 0;
+
+    for (l = 0; l < nl; l++){
+        for (c = 0; c < nc; c++){
+            if (M[l][c] == menorValor) {
+                contMenor++;
+            }
+            if (M[l][c] == maiorValor) {
+                contMaior++;
+            }
+        }
+    }
+
+    float totalElementos = (float)(nl * nc);
+    float percMenor = (contMenor * 100.0f) / totalElementos;
+    float percMaior = (contMaior * 100.0f) / totalElementos;
+
+    printf("%d %.2f%%\n", menorValor, percMenor);
+    printf("%d %.2f%%\n", maiorValor, percMaior);
 }
