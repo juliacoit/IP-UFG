@@ -23,3 +23,22 @@ niver.dia = 29;
 scanf("%d", &(niver.mes));
 // struct pessoa e struct data são tipos de dados heterogeneos definidos pelo desenvolvedor.
 
+int main (){
+  struct pessoa p1, p2;
+
+  p1.peso = 70;
+  strcpy(p1.nome, "joao");
+  /*
+  oq o strcopy faz:
+  p1.nome[0] = 'j';
+  p1.nome[1] = 'o';
+  p1.nome[2] = 'a';
+  p1.nome[3] = 'o';
+  p1.nome[4] = '\0';
+  */
+  p1.nasc.dia = 29;
+  p1.nasc.mes = 8;
+  p1.nasc.ano = 2000;
+
+  p2 = p1;
+}
