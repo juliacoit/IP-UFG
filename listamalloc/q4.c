@@ -35,6 +35,10 @@ int main(){
        // printf("Vetor: (%.2f, %.2f, %.2f, %.2f) Norma: %.2f\n", vetor4d.u, vetor4d.x, vetor4d.y, vetor4d.z, norma);
         i++;
     }
+    ordenaVetores(vetores, loop);
+    for (i = 0; i < loop; i++){
+            printf("Vetor: (%.2f, %.2f, %.2f, %.2f) Norma: %.2f\n", vetores[i][0], vetores[i][1],vetores[i][2],vetores[i][3],vetores[i][4]);
+    }
 
 
 
@@ -42,7 +46,7 @@ int main(){
 }
 
 float normaCalculator(v4d A){
-    float A.norma = sqrt(pow(A.u, 2) + pow(A.x, 2) + pow(A.y, 2) + pow(A.z, 2));
+    A.norma = sqrt(pow(A.u, 2) + pow(A.x, 2) + pow(A.y, 2) + pow(A.z, 2));
     return A.norma;
 }
 
@@ -56,11 +60,23 @@ float ** orderVector(int loop){
     return vectors;
 }
 
-void ordenaVetores(float ** vetores, int loop){
-    int i, j, temp, menor;
-    for (i = 0; i < loop-1; i++){
-        if (vetores[i][4] < vetores[i+i][4]){
-            menor = vetores[i][4];
+void ordenaVetores(float **vetores, int loop) {
+    int i, j, k;
+    float vetorTemp[5];
+
+    for (i = 0; i < loop - 1; i++) {
+        for (j = 0; j < loop - 1 - i; j++) {
+            
+            // se o valor atual for maior que o proximo, eles trocam
+            if (vetores[j][4] > vetores[j+1][4]) {
+                
+                // troca a linha inteira (copiando os 5 elementos)
+                for (k = 0; k < 5; k++) {
+                    vetorTemp[k] = vetores[j][k];
+                    vetores[j][k] = vetores[j+1][k];
+                    vetores[j+1][k] = vetorTemp[k];
+                }
+            }
         }
     }
 }
