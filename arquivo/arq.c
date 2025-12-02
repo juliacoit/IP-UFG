@@ -4,9 +4,9 @@
 int main (){
     FILE * arq = NULL;
     int l = 0;
-    
-    fopen("notas", "r");
-    while(fscanf(arq,"%*[^\n]") != EOF) l++;
+
+    arq = fopen("notas", "r");
+    while(fscanf(arq,"%*[^\n]%*c") != EOF) l++;
 
     printf("N de linhas: %d\n", l);
     fclose(arq);
